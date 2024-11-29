@@ -2,11 +2,23 @@ version: 0.2
 
 phases:
   install:
+    runtime-versions:
+      nodejs: 14
     commands:
+      - cd src  # Change to the subdirectory where package.json is located
+      - echo Installing dependencies...
       - npm install
+
   build:
     commands:
+      - cd src  # Navigate to the subdirectory
+      - echo Building the application...
       - npm run build
+
 artifacts:
   files:
-    - '**/*'
+    - 'src/**/*'  # Include files from the src folder in the build artifact
+
+cache:
+  paths:
+    - 'src/node_modules/**/*'  # Cache node_modules within the src folder
